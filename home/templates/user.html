@@ -1,0 +1,44 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Đăng ký
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/main_styles.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="container contact_container">
+  <div class="row">
+    <div class="col">
+
+      <!-- Breadcrumbs -->
+
+      <div class="breadcrumbs d-flex flex-row align-items-center">
+        <ul>
+          <li><a href="{% url 'home:home_page' %}">Trang chủ</a></li>
+          <li class="active"><a href="{% url 'home:user' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>Tài khoản</a></li>
+        </ul>
+      </div>
+      {% if user.username %}
+      <h1>Thông tin tài khoản</h1>
+      <h3>Tài khoản: {{user.username}}</h3>
+      <h4>Họ và tên: {{user.name}}</h4>
+      <h4>Email: {{user.email}}</h4>
+      <h4>Địa chỉ: {{user.address}}</h4>
+      {% else %}
+      <h3>Lựa chọn yêu cầu với tài khoản</h3>
+      <ul class="footer_nav">
+        <li>
+          <a href="{% url 'home:login' %}">Đăng nhập</a>  | <a href="{% url 'home:register' %}">Đăng ký</a>
+        </li>
+      </ul>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

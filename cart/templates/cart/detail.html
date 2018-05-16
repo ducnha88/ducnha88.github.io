@@ -1,0 +1,76 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Thông tin giỏ hàng của bạn
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container contact_container">
+    <div class="row">
+      <div class="col">
+
+        <!-- Breadcrumbs -->
+
+        <div class="breadcrumbs d-flex flex-row align-items-center">
+          <ul>
+            <li><a href="{% url 'home:home_page' %}">Trang chủ</a></li>
+            <li class="active"><a href="{% url "cart:cart_detail" %}"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <h1>Giỏ mua sắm của bạn</h1>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Ảnh</th>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Bỏ chọn</th>
+                <th>Giá đơn</th>
+                <th>Giá tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+                <td>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img  style="height:180px; width:180px;"src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                    </a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>
+                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                        {{ item.update_quantity_form.quantity }}
+                        {{ item.update_quantity_form.update }}
+                        <input type="submit" value="Cập nhật">
+                        {% csrf_token %}
+                    </form>
+                </td>
+                <td><a href="{% url "cart:cart_remove" product.id %}">Bỏ chọn</a></td>
+                <td class="num">{{ item.price }}&nbspVnđ</td>
+                <td class="num">{{ item.total_price }}&nbspVnđ</td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Tổng</td>
+            <td colspan="4"></td>
+            <td class="num">{{ cart.get_total_price }} &nbspVnđ</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url "shop:product_list" %}" class="button light">Tiếp tục mua sắm</a>
+        <a href="{% url "orders:order_create" %}" class="button">Đặt hàng</a>
+    </p>
+  </div>
+{% endblock %}

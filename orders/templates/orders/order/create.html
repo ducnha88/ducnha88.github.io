@@ -1,0 +1,52 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load recaptcha2 %}
+{% block title %}
+    Đặt hàng
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="container contact_container">
+    <div class="row">
+      <div class="col">
+
+          <!-- Breadcrumbs -->
+
+        <div class="breadcrumbs d-flex flex-row align-items-center">
+          <ul>
+            <li><a href="{% url 'home:home_page' %}">Trang chủ</a></li>
+            <li class="active"><a href="{% url 'orders:order_create' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt hàng</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+      <h2>Đặt hàng</h2>
+
+      <div class="order-info">
+          <h3>Đơn hàng của bạn</h3>
+          <ul>
+              {% for item in cart %}
+                  <li>{{ item.quantity }} x {{ item.product.name }} <span>{{ item.total_price }} Vnđ</span></li>
+              {% endfor %}
+          </ul>
+          <p>Tổng tiền: {{ cart.get_total_price }} &nbspVnđ</p>
+      </div>
+    <div class="row justify-content-center" >
+      <form action="." method="post" class="order-form">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+          <p><input type="submit" value="Tiến hành đặt hàng"></p>
+      </form>
+      {% recaptcha_explicit_init 'vi'%}
+    </div>
+  </div>
+{% endblock %}

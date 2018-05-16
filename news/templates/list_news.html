@@ -1,0 +1,75 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Tin tức mới nhất về những sản phẩm xách tay châu Âu chất lượng
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/categories_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/categories_responsive.css" %}">
+{% endblock %}
+
+{% block content %}
+      <div class="container contact_container">
+        <div class="row">
+          <div class="col">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+              <ul>
+                <li><a href="{% url 'home:home_page' %}">Trang chủ</a></li>
+                <li class="active"><a href="{% url 'news:list_news' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>Tin tức</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+          </div>
+        </div>
+        <h1>Tin tức</h1>
+
+        {% for n in news %}
+          <div class="news">
+            <div class="row">
+              <div class="col-lg-3 col-sm-6 ">
+                <a href="{% url 'news:detail_news' n.slug %}"> <img class="img-rounded pull-left" style="width:220px; height:220px; "src="{% if n.thumb %}{{n.thumb.url}}{% else %}{% static "img/1.jpg" %}{% endif %}"alt=""> </a>
+              </div>
+              <div class="col-lg-9 col-sm-6">
+                <div class="new">
+                  <h2><a href="{% url 'news:detail_news' n.slug %}">{{n.title}}</a></h2>
+                  <p>{{n.reduce}}</p>
+                  <p>{{n.datetime}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        {% if news.has_other_pages %}
+          <ul class="pagination ">
+            {% if news.has_previous %}
+              <li class="page_current"><a href="?page={{ news.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled page_current"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in news.paginator.page_range %}
+              {% if news.number == i %}
+                <li class="active page_current"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li class="page_current"><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if news.has_next %}
+              <li class="page_current"><a href="?page={{ news.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled page_current"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+{% endblock %}

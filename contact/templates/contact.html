@@ -1,0 +1,101 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Liên hệ với chúng tôi nào
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="container contact_container">
+  <div class="row">
+    <div class="col">
+
+      <!-- Breadcrumbs -->
+
+      <div class="breadcrumbs d-flex flex-row align-items-center">
+        <ul>
+          <li><a href="{% url 'home:home_page' %}">Trang chủ</a></li>
+          <li class="active"><a href="{% url 'contact:contact_us' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>Liên hệ</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Map Container -->
+
+  <div class="row">
+    <div class="col">
+      <div id="google_map">
+        <div class="map_container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3739.0447378568665!2d106.1627908!3d20.4222401!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4517617602e08224!2sShop+Family!5e0!3m2!1sen!2s!4v1525334462263" width="1110" height="537" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Us -->
+
+  <div class="row">
+
+    <div class="col-lg-6 contact_col">
+      <div class="contact_contents">
+        <h1>Liên hệ với chúng tôi</h1>
+        <p>Có rất nhiều cách để liên hệ với chúng tôi. Bạn có thể lựa chọn gọi điện hay gửi email. Hãy lựa chọn cách thuận tiện nhất để cho chúng tôi biết.</p>
+        <div>
+          <p>Số 21 Trần Đăng Ninh, Tp Nam Định, Nam Định, Việt Nam.</p>
+          <p>(+84) 0912609786</p>
+          <p>info.deercreative@gmail.com</p>
+        </div>
+        <div>
+          <p>Chuyên kinh doanh các mặt hàng cho mẹ và bé đến từ các nước Châu Âu, Nhật Bản</p>
+        </div>
+        <div>
+          <p>Giờ mở cửa: 8:00 - 12:00, 14:00 - 20:00 (cả tuần)</p>
+        </div>
+      </div>
+
+      <!-- Follow Us -->
+
+      <div class="follow_us_contents">
+        <h1>Theo dõi chúng tôi</h1>
+        <ul class="social d-flex flex-row">
+          <li><a href="#" style="background-color: #3a61c9"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+          <li><a href="#" style="background-color: #41a1f6"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          <li><a href="#" style="background-color: #fb4343"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+          <li><a href="#" style="background-color: #8f6247"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6 get_in_touch_col">
+      <div class="get_in_touch_contents">
+        <h1>Hãy cho chúng tôi biết</h1>
+        <p>Hoàn thành biểu mẫu dưới đây để nhận ưu đãi từ shop</p>
+        <form type="post" action=".">
+          <div>
+            <input id="input_name" class="form_input input_name input_ph" type="text" name="name" placeholder="Họ và tên" required="required" data-error="yêu cầu bạn điền thông tin.">
+            <input id="input_email" class="form_input input_email input_ph" type="email" name="email" placeholder="Email" required="required" data-error="yêu cầu bạn điền thông tin.">
+            <input id="input_website" class="form_input input_website input_ph" type="tel" maxlength=11 name="name" placeholder="Số điện thoại" required="required" data-error="yêu cầu bạn điền thông tin.">
+            <textarea id="input_message" class="input_ph input_message" name="message"  placeholder="Nội dung tin nhắn" rows="3" required data-error="Xin hãy để lại lời nhắn."></textarea>
+          </div>
+          <div>
+            <div class="g-recaptcha" data-sitekey="6LeYOlgUAAAAAFGvDs_ZwXDUVDYLIZusIv3ByPa9" style="height:100px;"></div>
+            <button id="review_submit" type="submit" class="red_button message_submit_btn trans_300" value="Submit" onclick="alert('Cám ơn bạn đã cho chúng tôi biết chúc một ngày tốt lành')"> &nbsp Tiếp tục &nbsp </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+{% block bot %}
+
+{% endblock %}

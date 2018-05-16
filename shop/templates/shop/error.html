@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ new.title }}
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+{% endblock %}
+
+{% block content %}
+      <div class="container contact_container">
+        <div class="row">
+          <div class="col">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+              <ul>
+                <li><a href="{% url 'home:home_page' %}">Quay lại trang chủ</a></li>
+                <!-- chú ý lỗi chỗ này là lối Reverse for 'product_list_by_category' with arguments '('',)' not found. 1 pattern(s) tried: ['shop/(?P<category_slug>[-\\w]+)/$'] -->
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="news_detail">
+          <div class="new">
+            <h2> Xin lỗi!! không tìm thấy yêu cầu của ban.</h2> 
+          </div>
+
+        </div>
+      </div>
+{% endblock %}

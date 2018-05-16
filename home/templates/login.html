@@ -1,0 +1,50 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Đăng nhập
+{% endblock %}
+{% block top %}
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_styles.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/contact_responsive.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="container contact_container">
+  <div class="row">
+    <div class="col">
+
+      <!-- Breadcrumbs -->
+
+      <div class="breadcrumbs d-flex flex-row align-items-center">
+        <ul>
+          <li><a href="{% url 'home:home_page' %}">Trang chủ</a></li>
+          <li class="active"><a href="{% url 'home:login' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>Đăng nhập</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <div class="row justify-content-center" >
+    <form class=""  method="POST">
+      {% csrf_token %}
+      {% for key,value in form.errors.items %}
+        {{value}}
+      {% endfor %}
+      <p><label>Tài khoản:</label>{{form.username}} </p>
+      <p><label>Mật khẩu:</label>{{form.password}} </p>
+      {% include 'includes/form.html' %}
+      <input type="hidden" name="next" value="/">
+      <p><input type="submit" name="" value="Đăng nhập"></p>
+    </form>
+  </div>
+  <div class="card-footer text-muted text-center">
+    Bạn chưa có tài khoản? <a href="{% url 'home:register' %}">Đăng ký</a>
+  </div>
+  <div class="text-center py-2">
+    <small>
+      <a href="#" class="text-muted">Quên mật khẩu?</a>
+    </small>
+  </div>
+
+{% endblock %}
