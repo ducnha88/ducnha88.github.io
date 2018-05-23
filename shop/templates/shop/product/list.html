@@ -172,7 +172,7 @@
                         {% endif %}
                         <div class="product_info">
                           <h6 class="product_name"><a href="{{ product.get_absolute_url }}">{{product.name}}</a></h6>
-                          <div class="product_price">{{product.price}}Vnđ{%if product.priceold != product.priceold%}<span>{{product.priceold}}Vnđ</span>{% endif %}</div>
+                          <div class="product_price">{{product.price}}Vnđ{%if product.priceold != product.price%}<span>{{product.priceold}}Vnđ</span>{% endif %}</div>
                         </div>
                     </div>
                     <div class="red_button add_to_cart_button">
